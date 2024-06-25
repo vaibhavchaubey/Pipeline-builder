@@ -1,5 +1,5 @@
 import React from 'react';
-import PipelineBuilder from './components/PipelineBuilder';
+import { PipelineBuilder } from './components';
 
 const App = () => {
   return (

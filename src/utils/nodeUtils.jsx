@@ -16,7 +16,6 @@ const generateNode = (type) => {
     id = `destination-${destinationNodeId++}`;
     label = `Destination ${destinationNodeId}`;
   } else {
-    console.error(`Unknown node type: ${type}`);
     return null;
   }
 
