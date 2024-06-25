@@ -6,7 +6,6 @@ let sourceNodeId = 0; // Counter for source nodes
 let destinationNodeId = 0; // Counter for destination nodes
 
 const generateNode = (type, nodes) => {
-  console.log(nodes);
   let id;
   let label;
 
@@ -17,7 +16,6 @@ const generateNode = (type, nodes) => {
     id = `destination-${destinationNodeId++}`;
     label = `Destination ${destinationNodeId}`;
   } else {
-    console.error(`Unknown node type: ${type}`);
     return null;
   }
 
