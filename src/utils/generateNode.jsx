@@ -2,8 +2,8 @@ import React from 'react';
 import CustomSourceNode from '../components/CustomSourceNode';
 import CustomDestinationNode from '../components/CustomDestinationNode';
 
-let sourceNodeId = 0; // Counter for source nodes
-let destinationNodeId = 0; // Counter for destination nodes
+let sourceNodeId = 0;
+let destinationNodeId = 0;
 
 const generateNode = (type, nodes) => {
   let id;

@@ -7,14 +7,12 @@ import ReactFlow, {
   useEdgesState,
   MiniMap,
   Controls,
-  applyEdgeChanges,
-  applyNodeChanges,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import NodeTypeSelector from './NodeTypeSelector';
 import CustomSourceNode from './CustomSourceNode';
 import CustomDestinationNode from './CustomDestinationNode';
-import generateNode from '../utils/nodeUtils';
+import generateNode from '../utils/generateNode';
 
 const nodeTypes = {
   sourceNode: CustomSourceNode,
@@ -26,7 +24,6 @@ const PipelineBuilder = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [selectedNode, setSelectedNode] = useState(null);
 
-  // Function to add a new node of specified type (source or destination)
   const addNode = (type) => {
     const newNode = generateNode(type, nodes);
     setNodes((nds) => [...nds, newNode]);
@@ -35,8 +32,8 @@ const PipelineBuilder = () => {
   const onConnect = useCallback(
     (params) => {
       if (validateConnection(params)) {
-        const animatedEdge = { ...params, animated: true }; // Add animated property to edge
-        setEdges((eds) => addEdge(animatedEdge, eds)); // Add new edge to edges state
+        const animatedEdge = { ...params, animated: true };
+        setEdges((eds) => addEdge(animatedEdge, eds));
       }
     },
     [nodes]
@@ -46,7 +43,6 @@ const PipelineBuilder = () => {
     setSelectedNode(node.id);
   };
 
-  // Handler for edge click event
   const onEdgeClick = (event, edge) => {
     setEdges((eds) => eds.filter((e) => e.id !== edge.id));
   };
@@ -55,7 +51,6 @@ const PipelineBuilder = () => {
     setSelectedNode(node.id);
   }, []);
 
-  // Function to validate node connection
   const validateConnection = (params) => {
     const sourceNode = nodes.find((node) => node.id === params.source);
     const targetNode = nodes.find((node) => node.id === params.target);
