@@ -28,7 +28,7 @@ const PipelineBuilder = () => {
 
   // Function to add a new node of specified type (source or destination)
   const addNode = (type) => {
-    const newNode = generateNode(type);
+    const newNode = generateNode(type, nodes);
     setNodes((nds) => [...nds, newNode]);
   };
 
@@ -76,6 +76,11 @@ const PipelineBuilder = () => {
     };
   }, [selectedNode]);
 
+  const nodeColor = (node) => {
+    if (node.type === 'destinationNode') return '#48bb78';
+    return 'rgb(59 130 246)';
+  };
+
   return (
     <ReactFlowProvider>
       <div className="flex flex-col h-full">
@@ -96,6 +101,7 @@ const PipelineBuilder = () => {
             deleteKeyCode={46}
             style={{ width: '100%', height: '100%' }}
           >
+            <MiniMap nodeColor={nodeColor} zoomable pannable />
             <Controls />
             <Background variant="dots" gap={12} size={1} />
           </ReactFlow>

@@ -5,7 +5,8 @@ import CustomDestinationNode from '../components/CustomDestinationNode';
 let sourceNodeId = 0; // Counter for source nodes
 let destinationNodeId = 0; // Counter for destination nodes
 
-const generateNode = (type) => {
+const generateNode = (type, nodes) => {
+  console.log(nodes);
   let id;
   let label;
 
@@ -16,12 +17,17 @@ const generateNode = (type) => {
     id = `destination-${destinationNodeId++}`;
     label = `Destination ${destinationNodeId}`;
   } else {
+    console.error(`Unknown node type: ${type}`);
     return null;
   }
 
   const isSource = type === 'sourceNode';
+  const existingNodesOfType = nodes.filter((node) => node.type === type);
+  const yOffset = existingNodesOfType.length;
+
   const xPosition = isSource ? 50 : window.innerWidth - 250;
-  const yPosition = Math.random() * (window.innerHeight - 150);
+  // const xPosition = isSource ? 50 : 1000;
+  const yPosition = yOffset * 100;
 
   return {
     id,
